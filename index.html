@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1 class="countdown-title"><img src="rd.svg" width="120px" height="120px"></h1>
+    <div id="countdown" class="countdown">
+        <div class="countdown-number">
+        <span class="days countdown-time"></span>
+    <span class="countdown-text">Дней</span>
+  </div>
+  <!-- Инвайт: _DQ#!c4D4RQ2%h -->
+  <div class="countdown-number">
+    <span class="hours countdown-time"></span>
+    <span class="countdown-text">Часов</span>
+  </div>
+  <div class="countdown-number">
+    <span class="minutes countdown-time"></span>
+    <span class="countdown-text">Минут</span>
+  </div>
+  <div class="countdown-number">
+    <span class="seconds countdown-time"></span>
+    <span class="countdown-text">Секунд</span>
+  </div>
+</div>
+<div class="countdown-bottomtext"><p>Данный таймер покажет Вам, сколько времени осталось до ЗБТ РетроДейла.<br/>А также, поможет скрасить ожидание перед этой «далекой» датой.</p></div>
+<div class="links">
+    <button class="github-button"><a href="https://github.com/dozbt/dozbt">Star on GitHub</a></button>
+    <button class="share_btn" data-social="vk">ВК</button>
+</div>
+<div class="madeby"><p>Made by <a id="al" href="https://vk.com/id4635704">самизнаетекто</a></p></div>
+    <!--jq-->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <!--socials-->
+    <script>
+            $(function(){
+                $(".share_btn").click(function(){
+                    var social = $(this).data("social");
+                    var url_share = location.href;
+                    if (typeof $(this).attr("data-url") !== typeof undefined && $(this).attr("data-url") !== false) {
+                        url_share = $(this).data("url");        
+                    }
+                    share(social, url_share);
+                });
+            });
+            function share(social, url_share){
+                var url_soc = false;
+                switch (social) {
+                    case "vk":
+                        url_soc = "https://vk.com/share.php?url="+url_share;
+                        break;
+                    case "fb":
+                        url_soc = "https://www.facebook.com/sharer/sharer.php?u="+url_share;
+                        break;
+                }
+                 
+                if(url_soc){
+                    var width = 800, height = 500;
+                    var left = (window.screen.width - width) / 2;
+                    var top = (window.screen.height - height) / 2;
+                    social_window = window.open(url_soc, "share_window", "height=" + height + ",width=" + width + ",top=" + top + ",left=" + left);
+                    social_window.focus();
+                }
+            }
+            </script>
+    <!-- main script -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+        function getTimeRemaining(endtime) {
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+  return {
+    'total': t,
+    'days': days,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+
+function initializeClock(id, endtime) {
+  var clock = document.getElementById(id);
+  var daysSpan = clock.querySelector('.days');
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    var t = getTimeRemaining(endtime);
+
+    daysSpan.innerHTML = t.days;
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+    }
+  }
+
+  updateClock();
+  var timeinterval = setInterval(updateClock, 1000);
+}
+var deadline="December 09 2019 14:00:03 GMT+0300";
+initializeClock('countdown', deadline);
+    </script>
+        </body>
+</html>
